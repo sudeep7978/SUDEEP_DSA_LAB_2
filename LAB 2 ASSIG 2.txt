@@ -1,0 +1,42 @@
+import java.util.*;
+
+public class CurrencyDenomination {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Input the currency denominations
+        System.out.print("Enter the size of currency denominations: ");
+        int n = sc.nextInt();
+        int[] denominations = new int[n];
+        System.out.println("Enter the currency denominations value: ");
+        for (int i = 0; i < n; i++) {
+            denominations[i] = sc.nextInt();
+        }
+
+        // Sort the denominations in descending order
+        Arrays.sort(denominations);
+        int[] sortedDenominations = new int[n];
+        for (int i = 0; i < n; i++) {
+            sortedDenominations[i] = denominations[n - i - 1];
+        }
+
+        // Input the amount to be paid
+        System.out.print("Enter the amount you want to pay: ");
+        int amount = sc.nextInt();
+
+        // Compute the minimum number of notes
+        System.out.println("Your payment approach in order to give min no of notes will be: ");
+        int[] count = new int[n];
+        for (int i = 0; i < n; i++) {
+            while (amount >= sortedDenominations[i]) {
+                amount -= sortedDenominations[i];
+                count[i]++;
+            }
+            if (count[i] > 0) {
+                System.out.println(sortedDenominations[i] + ":" + count[i]);
+            }
+        }
+
+        sc.close();
+    }
+}
